@@ -1,0 +1,13 @@
+# Local-only content: video projects, drafts, source assets, captures.
+# Everything under local/ stays on this machine — see local/README.md.
+local/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Node
+node_modules/
