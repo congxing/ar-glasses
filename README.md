@@ -1,4 +1,12 @@
-# Snap Spectacles — Patent Map
+# AR Glasses — a long-term thesis
+
+Patents, product, business, and technical deep-dives on AR glasses, one company
+at a time. Each chapter reads the same hardware story through four lenses:
+**business** (the strategic bet), **product** (what the device chooses to be),
+**technical** (what the patents and teardowns reveal), and **application**
+(what builders can ship today — the live demo is the proof).
+
+## Chapter 1 — Snap Spectacles
 
 An interactive 3D map of Snap Inc.'s AR-glasses patent portfolio, projected onto
 the 2026 **Specs** hardware — plus the underlying curated dataset (697 Snap
@@ -40,7 +48,7 @@ open it. Planned evolution into a proper site:
 - [ ] Split the monolith: extract data JSON, styles, and modules from the inline HTML
 - [ ] Host the demo (static hosting — no build step required)
 - [ ] Pipeline to refresh the dataset (weekly Google Patents sweep + USPTO ODP continuity check, per `data/README.md` "Keeping current")
-- [ ] More topics beyond Spectacles: same treatment for other AR/wearables portfolios
+- [ ] Next chapters: the same four-lens treatment for other AR-glasses makers (Meta, Google/Android XR, Xreal, …), each with its own patent map and dataset
 
 Contributions and issues welcome.
 
