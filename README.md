@@ -17,7 +17,9 @@ documents, 65 Spectacles-specific) and the downloaded patent PDFs.
 
 ## Try it
 
-Open **[`web/index.html`](web/index.html)** in a browser — it is a single
+**Live demo → https://ar-glasses-six.vercel.app**
+
+Or open **[`web/index.html`](web/index.html)** locally — it is a single
 self-contained file (data and 3D model embedded; only the Three.js library
 loads from a CDN).
 
