@@ -29,7 +29,12 @@ loads from a CDN).
   explainer and the system's innovation cluster (one 3D node per invention,
   sized by patent family; click a node to load that family in the sidebar).
 - **Big Ideas (ELI5)** tab — a click-through deck explaining which features are
-  a big deal and the patents behind them.
+  a big deal and the patents behind them, now with **interactive mini-demos** for
+  the flagship inventions: play the waveguide light-path, drag the frame to watch
+  bend-correction cancel the wobble, slide your thumb along the finger-ruler
+  gesture, trigger EMG silent-speech recognition, toggle the health-sensing
+  face, and see how an on/off LCoS chip fakes 16.7M colors with timed bit-planes.
+  Each demo is grounded in the actual patent text (see `data/summaries/`).
 - **Timeline strip** — every patent plotted by publication year across the 6
   system lanes, showing the 2025–26 filing surge into the 2026 launch.
 
@@ -40,6 +45,7 @@ loads from a CDN).
 | `web/` | The interactive visualization (`index.html`) plus `assets/spec.glb`, an original 3D reconstruction of the glasses made by the author from public reference images (a copy is embedded in the HTML). This is the code that grows into the website. |
 | `data/` | The patent dataset: curated CSVs + [`data/README.md`](data/README.md) documenting scope, methodology, and caveats. |
 | `data/pdfs/` | 40 downloaded Spectacles patent PDFs (filename = publication number). Patent documents are public records — see `LICENSE` scope notes. |
+| `data/summaries/` | Plain-English summaries of all 40 PDFs, read from the full patents (text extraction + vision for the scanned ones), grouped by area. The source notes behind the interactive explainers. |
 | `local/` | **Not in git.** Per-project working area (video productions, essay drafts, source assets, capture variants). See `local/README.md`. |
 
 ## Roadmap
