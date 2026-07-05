@@ -550,7 +550,7 @@ const patByNum=n=>PATS.find(p=>p.n===n);
 const featPats=f=>(f.pats||[]).map(patByNum).filter(Boolean);
 function switchTab(v){document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.v===v));
   document.getElementById('main').classList.toggle('on',v==='map');document.getElementById('deck').classList.toggle('on',v==='deck');
-  if(v==='map'){resize();drawTimeline(curKey);}}
+  if(v==='map'){resize();drawTimeline(curKey);}if(v==='deck'){renderDeck();}}
 document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>switchTab(t.dataset.v)));
 function showFeature(i){const f=FEATURES[i];switchTab('map');
   if(f.group)selectGroup(f.group);else overview();
@@ -726,7 +726,7 @@ function demoWaveguide(root){
     svg.appendChild(S('text',{x:70,y:338,fill:'#8794a6','font-size':9.5},[T('into efficiency zones:')]));
     for(let i=0;i<4;i++)svg.appendChild(S('rect',{x:150+i*14,y:330,width:12,height:16,rx:2,fill:AC,opacity:zoned?(0.3+i*0.22):0.5}));
   }
-  function tick(){if(!root.isConnected)return;if(playing)ph=(ph+0.0045)%1;draw();requestAnimationFrame(tick);}tick();
+  function tick(){if(!root.isConnected||!root.offsetParent)return;if(playing)ph=(ph+0.0045)%1;draw();requestAnimationFrame(tick);}tick();
   const c=H('div',{class:'ctrls'});
   const play=H('button',{class:'dbtn'},'∥ Pause');c.appendChild(play);
   const tog=H('label',{class:'tog'});const sw=H('span',{class:'switch on'});sw.appendChild(H('i',{}));
@@ -780,7 +780,7 @@ function demoGesture(root){
     svg.appendChild(S('text',{x:bx,y:bBot,fill:AC,'font-size':22,'font-weight':800,'text-anchor':'middle'},[T(Math.round(val*100)+'%')]));
   }
   function T(s){return document.createTextNode(s);}
-  function loop(){if(!root.isConnected)return;if(tapPulse>0)tapPulse=Math.max(0,tapPulse-0.04);draw();requestAnimationFrame(loop);}
+  function loop(){if(!root.isConnected||!root.offsetParent)return;if(tapPulse>0)tapPulse=Math.max(0,tapPulse-0.04);draw();requestAnimationFrame(loop);}
   loop();
   // drag thumb along finger: project pointer onto finger axis
   function setFromEvent(e){
@@ -792,7 +792,7 @@ function demoGesture(root){
   }
   svg.addEventListener('pointerdown',e=>{dragging=true;svg.setPointerCapture(e.pointerId);setFromEvent(e);});
   svg.addEventListener('pointermove',e=>{if(dragging)setFromEvent(e);});
-  svg.addEventListener('pointerup',()=>dragging=false);
+  svg.addEventListener('pointerup',()=>dragging=false);svg.addEventListener('pointercancel',()=>dragging=false);svg.addEventListener('lostpointercapture',()=>dragging=false);
   const c=H('div',{class:'ctrls'});
   const tap=H('button',{class:'dbtn'},'☝ Thumb-tap = select');
   c.appendChild(tap);
@@ -851,7 +851,7 @@ function demoEMG(root){
       svg.appendChild(S('text',{x:px+84,y:ry+5,fill:AC,'font-size':13,'font-weight':800},[T('inner speech ✓ → '+acts[ai][0]+' '+acts[ai][1])]));
     }else svg.appendChild(S('text',{x:px+72,y:ry+4,fill:'#57647a','font-size':11},[T('press the button and say a word in your head…')]));
   }
-  function loop(){if(!root.isConnected)return;if(state==='reading'){prog+=0.02;if(prog>=1)state='done';}draw();requestAnimationFrame(loop);}loop();
+  function loop(){if(!root.isConnected||!root.offsetParent)return;if(state==='reading'){prog+=0.02;if(prog>=1)state='done';}draw();requestAnimationFrame(loop);}loop();
   const c=H('div',{class:'ctrls'});
   const btn=H('button',{class:'dbtn'},'🧠 Say a word in your head');c.appendChild(btn);
   const seg=H('div',{class:'seg'});
@@ -912,7 +912,7 @@ function demoHealth(root){
       svg.appendChild(S('text',{x:px+16,y:py+124,fill:'#8794a6','font-size':10.5},[T('fainting')]));
     }
   }
-  function loop(){if(!root.isConnected)return;draw();requestAnimationFrame(loop);}loop();
+  function loop(){if(!root.isConnected||!root.offsetParent)return;draw();requestAnimationFrame(loop);}loop();
   const c=H('div',{class:'ctrls'});const seg=H('div',{class:'seg'});
   [['pulse','♥ Heart rate'],['thermal','🌡 Thermal'],['faint','🧍 Balance']].forEach(([m,lab])=>{const b=H('button',{class:m==='pulse'?'on':''},lab);b.addEventListener('click',()=>{mode=m;[...seg.children].forEach(x=>x.classList.remove('on'));b.classList.add('on');});seg.appendChild(b);});
   c.appendChild(seg);root.appendChild(c);
@@ -967,7 +967,7 @@ function demoLCoS(root){
     svg.appendChild(S('text',{x:bx,y:by+92,fill:'#8794a6','font-size':11,'font-family':'monospace'},[T('binary: '+on.join(''))]));
   }
   function T(s){return document.createTextNode(s);}
-  function loop(){if(!root.isConnected)return;draw();requestAnimationFrame(loop);}
+  function loop(){if(!root.isConnected||!root.offsetParent)return;draw();requestAnimationFrame(loop);}
   loop();
   const c=H('div',{class:'ctrls'});
   c.appendChild(H('span',{},'Brightness'));
@@ -1039,7 +1039,7 @@ function demoFrame(root){
       svg.appendChild(S('rect',{x:mx,y:264,width:150*v,height:9,rx:4,fill:col}));
     });
   }
-  function loop(){if(!root.isConnected)return;draw();requestAnimationFrame(loop);}loop();
+  function loop(){if(!root.isConnected||!root.offsetParent)return;draw();requestAnimationFrame(loop);}loop();
   const c=H('div',{class:'ctrls'});
   const tog=H('label',{class:'tog'});const sw=H('span',{class:'switch on'});sw.appendChild(H('i',{}));
   tog.appendChild(sw);tog.appendChild(H('span',{},'<b style="color:#e8eef5">Paired phone/peer device helps</b> (distributed compute)'));
@@ -1097,7 +1097,7 @@ function demoConn(root){
       svg.appendChild(S('rect',{x:70,y:216,width:180*batt,height:12,rx:6,fill:'#34d399'}));
     }
   }
-  function loop(){if(!root.isConnected)return;draw();requestAnimationFrame(loop);}loop();
+  function loop(){if(!root.isConnected||!root.offsetParent)return;draw();requestAnimationFrame(loop);}loop();
   const c=H('div',{class:'ctrls'});const seg=H('div',{class:'seg'});
   [['antenna','📶 Antenna'],['location','📍 Location']].forEach(([m,lab])=>{const b=H('button',{class:m==='antenna'?'on':''},lab);b.addEventListener('click',()=>{mode=m;[...seg.children].forEach(x=>x.classList.remove('on'));b.classList.add('on');});seg.appendChild(b);});
   c.appendChild(seg);root.appendChild(c);
